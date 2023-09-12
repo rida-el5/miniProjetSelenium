@@ -1,0 +1,7 @@
+Constants\AppInformation.class
+pages\HomePage.class
+pages\SunScreenPage.class
+pages\MoisturizerPage.class
+util\TextChecker.class
+configuration\ChromeConfiguration.class
+tests\SuiteTest.class

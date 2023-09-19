@@ -25,6 +25,24 @@ public class ShoppingCart extends UtilityFonctions{
     @FindBy(xpath = "//div[@class = 'title']/h1")
     private WebElement popupName;
 
+    @FindBy(xpath = "//input[@id='email']")
+    private WebElement email;
+
+    @FindBy(xpath = "//input[@id='card_number']")
+    private WebElement cardNumber;
+
+    @FindBy(xpath = "//input[@id='cc-exp']")
+    private WebElement date;
+
+    @FindBy(xpath = "//input[@id='cc-csc']")
+    private WebElement cvv;
+
+    @FindBy(xpath = "//span[@class='iconTick']")
+    private WebElement payInner;
+
+    @FindBy(xpath = "//p[@class='text-justify']")
+    private WebElement confirmationMessage;
+
     WebDriver driver;
 
     public ShoppingCart (WebDriver driver){
@@ -46,9 +64,29 @@ public class ShoppingCart extends UtilityFonctions{
     }
 
     public void checkPopup(){
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
         driver.switchTo().frame(0);
         assertEquals("Stripe.com", ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", popupName));
         driver.switchTo().defaultContent();
+    }
+
+    public void fillForm(String email, String cardNumber, String date, String cvv){
+        driver.switchTo().frame(0);
+        this.email.sendKeys(email);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].value = '"+ cardNumber +"';", this.cardNumber);
+        jsExecutor.executeScript("arguments[0].value = '"+ date +"';", this.date);
+        this.cvv.sendKeys(cvv);
+        driver.switchTo().defaultContent();
+    }
+
+    public void clickPay(){
+        driver.switchTo().frame(0);
+        payInner.click();
+        driver.switchTo().defaultContent();
+    }
+
+    public void checkConfirmationMessage(){
+        assertEquals("Your payment was successful. You should receive a follow-up call from our sales team.", confirmationMessage.getText());
     }
 }

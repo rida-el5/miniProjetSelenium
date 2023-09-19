@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class MoisturizerPage extends UtilityFonctions{
+
     @FindBy(xpath = "//h2[normalize-space()='Moisturizers']")
     private WebElement pageName;
 

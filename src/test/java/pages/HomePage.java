@@ -8,11 +8,12 @@ import org.openqa.selenium.support.PageFactory;
 import util.UtilityFonctions;
 
 public class HomePage extends UtilityFonctions {
-    @FindBy(xpath = "//button[text()='Buy moisturizers']")
-    WebElement buyMoisturizer;
 
     @FindBy(xpath = "//h2[normalize-space()='Current temperature']")
     private WebElement pageName;
+
+    @FindBy(xpath = "//button[text()='Buy moisturizers']")
+    WebElement buyMoisturizer;
 
     WebDriver driver;
 
@@ -25,11 +26,11 @@ public class HomePage extends UtilityFonctions {
         PageFactory.initElements(driver, this);
     }
 
-    public void clickBuyMoisturizer(){
-        buyMoisturizer.click();
-    }
-
     public void checkCurrentPage(){
         assertEquals("Current temperature", this.getPageName().getText());
+    }
+
+    public void clickBuyMoisturizer(){
+        buyMoisturizer.click();
     }
 }
